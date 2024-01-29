@@ -37,14 +37,7 @@ def model(input_df):
   prompt = hub.pull("rlm/rag-prompt")
   
   llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0)
-
-  rag_chain = (
-      {"context": retriever | format_docs, "question": RunnablePassthrough()}
-      | prompt
-      | llm
-      | StrOutputParser()
-  )
-  
+    
   qa_chain = RetrievalQA.from_chain_type(
       llm,
       retriever=vectorstore.as_retriever(),
