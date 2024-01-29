@@ -3,12 +3,13 @@ import pandas as pd
 import os
 import mlflow
 
-from langchain.chains import RetrievalQA
-from langchain.document_loaders import WebBaseLoader
-from langchain.embeddings.openai import OpenAIEmbeddings
-from langchain.llms import OpenAI
+from langchain import hub
 from langchain.text_splitter import CharacterTextSplitter
-from langchain.vectorstores import Chroma
+from langchain_community.vectorstores import Chroma
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.runnables import RunnablePassthrough
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from langchain.chains import RetrievalQA
 
 
 os.environ["OPENAI_API_KEY"] = getpass.getpass('enter api key: ')
